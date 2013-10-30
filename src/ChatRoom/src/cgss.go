@@ -7,7 +7,7 @@ import (
 	"strings"
 	"strconv"
 	"ipc"
-	"cg
+	"cg"
 )
 
 var centerClient *cg.CenterClient
@@ -129,7 +129,7 @@ func main() {
 	
 	for {
 		fmt.Print("Command> ")
-		b, _, _ = r.ReadLine()
+		b, _, _ := r.ReadLine()
 		line := string(b)
 		
 		tokens := strings.Split(line, " ")

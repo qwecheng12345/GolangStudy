@@ -18,7 +18,7 @@ type Message struct {
 type CenterServer struct {
 	servers map[string] ipc.Server
 	players [] *Player
-	rooms [] *Room
+	//rooms [] *Room
 	mutex sync.RWMutex
 }
 
@@ -76,6 +76,7 @@ func (server *CenterServer) listPlayer(params string) (players string, err error
 	} else {
 		err = errors.New("No player online.")
 	}
+	return 
 }
 
 func (server *CenterServer) broadcast(params string) error {
@@ -102,23 +103,23 @@ func (server *CenterServer) broadcast(params string) error {
 
 func (server *CenterServer) Handle(method, params string) *ipc.Response {
 	switch method {
-		case "addplayer" :
+		case "addPlayer" :
 			err := server.addPlayer(params)
 			if err != nil {
 				return &ipc.Response{Code:err.Error()}
 			}
-		case "removeplayer" :
+		case "removePlayer" :
 			err := server.removePlayer(params)
 			if err != nil {
 				return &ipc.Response{Code:err.Error()}
 			}
-		case "listplayer" :
+		case "listPlayer" :
 			players, err := server.listPlayer(params)
 			if err != nil {
 				return &ipc.Response{Code:err.Error()}
 			}
 			
-			return *ipcResponse{"200", players}
+			return &ipc.Response{"200", players}
 		case "broadcast" :
 			err := server.broadcast(params)
 			if err != nil {

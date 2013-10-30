@@ -34,7 +34,7 @@ func (client *CenterClient) RemovePlayer(name string) error {
 	return errors.New(ret.Code)
 }
 
-func (client *CenterClient) ListPlayer(params string) (ps []*Player, err erros) {
+func (client *CenterClient) ListPlayer(params string) (ps []*Player, err error) {
 	resp, _ := client.Call("listPlayer", params)
 	if resp.Code != "200" {
 		err = errors.New(resp.Code)

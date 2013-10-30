@@ -1,4 +1,4 @@
-.package ipc
+package ipc
 
 import (
 	"encoding/json"
@@ -39,15 +39,15 @@ func (server *IpcServer) Connect() chan string {
 				break
 			}
 			
-			var req Requset
-			err := json.Unmarshall([]byte(request), &req)
+			var req Request
+			err := json.Unmarshal([]byte(request), &req)
 			if err != nil {
 				fmt.Println("Invalid request format: ", request)
 			}
 			
 			resp := server.Handle(req.Method, req.Params)
 			
-			b, err := json.Marshall(resp)
+			b, err := json.Marshal(resp)
 			
 			c <- string(b)
 		}

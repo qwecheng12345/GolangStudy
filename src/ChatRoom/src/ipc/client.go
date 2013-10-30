@@ -8,8 +8,8 @@ type IpcClient struct {
 	conn chan string
 }
 
-func NeweIpcClient(server *IpcServer) *IpcClient {
-	c := server.connect()
+func NewIpcClient(server *IpcServer) *IpcClient {
+	c := server.Connect()
 	
 	return &IpcClient{c}
 }
